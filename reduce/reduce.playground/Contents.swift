@@ -155,3 +155,91 @@ func infoFromState(state: String, persons: [[String: Any]])
 print(infoFromState(state: "CA", persons: persons))
 // prints: (count: 3, age: 34.3333)
 
+
+//以下范例展示了 reduce 的其他使用案例。请记住例子只作为展示教学使用，即它们更多地强调 reduce 的使用方式，而非为你的代码库提供通用的解决方法。大多数范例都可以通过其他更好、更快的方式来编写（即通过 extension 或 generics）。并且这些实现方式已经在许多 Swift 库中都有实现，诸如 SwiftSequence 以及 Dollar.swift
+
+
+
+/* 
+  Minimum
+  初始值为 Int.max，传入闭包为 min：求两个数的最小值
+  min 闭包传入两个参数：1. 初始值 2. 遍历列表时的当前元素
+  倘若当前元素小于初始值，初始值就会替换成当前元素
+  示意写法： initial = min(initial, elem)
+ 
+ */
+//返回列表中的最小项
+[1, 5, 2, 9, 4].reduce(Int.max, min)
+//显然这个更好
+[1, 5, 2, 9, 4].min()
+
+/*
+ Unique
+ 
+ 剔除列表中重复的元素。当然，最好的解决方式是使用集合（Set）
+ */
+[1, 2, 5, 1, 7].reduce([Int](), { (a: [Int], b: Int) -> [Int] in
+    if a.contains(b) {
+        return a
+    } else {
+        return a + [b]
+    }
+})
+
+
+
+//该函数允许你有选择从两个序列中挑选元素合并成为一个新序列返回。
+func interdig<T>(list1: [T], list2: [T]) -> [T] {
+    // Zip2Sequence 返回 [(list1, list2)] 是一个数组，类型为元组
+    // 也就解释了为什么 combinator 闭包的类型是 (ac: [T], o: (T, T)) -> [T]
+    return zip(list1, list2).reduce([], { (ac: [T], o: (T, T)) -> [T] in
+        return ac + [o.0, o.1]
+    })
+}
+print(interdig(list1: [1, 3, 5], list2: [2, 4, 6]))
+
+
+
+/* Group By 遍历整个列表，通过一个鉴别函数对列表中元素进行分组，将分组后的列表作为结果值返回。问题中的鉴别函数返回值类型需要遵循 Hashable 协议，这样我们才能拥有不同的键值。此外保留元素的排序，而组内元素排序则不需要保留。
+ */
+
+func groupby<T, H: Hashable>(items: [T], f: (T) -> H) -> [H: [T]] {
+    return items.reduce([:], { ( acc: [H: [T]], o: T) -> [H: [T]] in
+        // o 为遍历序列的当前元素
+        var ac = acc
+        let h = f(o) // 通过 f 函数得到 o 对应的键值
+        if var c = ac[h] { // 说明 o 对应的键值已经存在，只需要更新键值对应的数组元素即可
+            c.append(o)
+            ac.updateValue(c, forKey: h)
+        } else { // 说明 o 对应的键值不存在，需要为字典新增一个键值，对应值为 [o]
+            ac.updateValue([o], forKey: h)
+        }
+        return ac
+    })
+}
+print(groupby(items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], f: { $0 % 3 }))
+// prints: [2: [2, 5, 8, 11], 0: [3, 6, 9, 12], 1: [1, 4, 7, 10]]
+print(groupby(items: ["Carl", "Cozy", "Bethlehem", "Belem", "Brand", "Zara"], f: { $0.characters.first! }))
+// prints: ["C" : ["Carl" , "Cozy"] , "B" : ["Bethlehem" , "Belem" , "Brand"] , "Z" : ["Zara"]]
+
+
+
+
+func chunk<T>(list: [T], length: Int) -> [[T]] {
+    typealias Acc = (stack: [[T]], cur: [T], cnt: Int)
+    let l = list.reduce((stack: [], cur: [], cnt: 0), { (ac: Acc, o: T) -> Acc in
+        if ac.cnt == length {
+            return (stack: ac.stack + [ac.cur], cur: [o], cnt: 1)
+        } else {
+            return (stack: ac.stack, cur: ac.cur + [o], cnt: ac.cnt + 1)
+        }
+    })
+    return l.stack + [l.cur]
+}
+print(chunk(list: [1, 2, 3, 4, 5, 6, 7], length: 2))
+
+
+//有关 Reduce 底层实现，请看http://www.jianshu.com/p/06c90c0470b2
+//这么做的原因来看这篇博文。https://airspeedvelocity.net/2015/08/03/arrays-linked-lists-and-performance/
+
+
