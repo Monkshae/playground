@@ -27,5 +27,5 @@ func binarySearch<T: Comparable>(array: [T], targetValue: T) -> Int? {
 
 var a = [1,2,3,5,5,7,10,36,50]
 
-binarySearch(array: a, targetValue: 36)
+binarySearch(array: a, targetValue: 30)
 

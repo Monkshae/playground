@@ -46,3 +46,8 @@ var set = NSMutableSet(arrayLiteral: dic,"b","a")
 dic["rt"] = 45
 set
 
+
+var leftTableView: UITableView?
+
+
+

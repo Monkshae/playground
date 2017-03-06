@@ -117,3 +117,54 @@ quickSort(array: &a1, left: 0, right: a1.count - 1)
 var b4 =  Array<Any>.swiftQuickSort(array: a4)
 
 a4.sorted(by: { $0 > $1 })
+
+
+
+//归并排序
+func mergeSort(array: [Int]) -> [Int] {
+    var helper = Array(repeating: 0, count: array.count)
+    var array = array
+    mergeSort(array: &array, helper: &helper, low: 0, high: array.count - 1)
+    return array
+}
+
+func mergeSort( array: inout [Int], helper: inout [Int], low: Int, high: Int) {
+    guard low < high else {
+        return
+    }
+    let middle = (high - low) / 2 + low
+    mergeSort(array: &array, helper: &helper, low: low, high: middle)
+    mergeSort(array: &array, helper: &helper, low: middle + 1, high: high)
+    merge(array: &array, helper: &helper, low: low, middle: middle, high: high)
+    
+}
+
+func merge( array: inout [Int], helper: inout [Int], low: Int, middle: Int, high: Int) {
+    for i in low...high {
+        helper[i] = array[i]
+    }
+    var helperLeft = low
+    var helperRight = middle + 1
+    var current = low
+    while helperLeft <= middle && helperRight <= high {
+        if helper[helperLeft] <= helper[helperRight] {
+            array[current] = helper[helperLeft]
+            helperLeft += 1
+        } else {
+            array[current] = helper[helperRight]
+            helperRight += 1
+        }
+        current += 1
+    }
+    guard middle - helperLeft >= 0 else {
+        return
+    }
+    for i in 0...middle - helperLeft {
+        array[current + i] = helper[helperLeft + i]
+    }
+}
+let b = [4,2,6,1,3,8,9]
+let b1 = mergeSort(array: b)
+print(b1)
+
+

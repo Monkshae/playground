@@ -32,30 +32,30 @@
     NSString *s6 = [NSString stringWithFormat:@"%@", s1];
     
     
-    NSLog(@"s0->%p",s0);
-    NSLog(@"s1->%p",s1);
-    NSLog(@"s2->%p",s2);
-    NSLog(@"s3->%p",s3);
-    NSLog(@"s4->%p",s4);
-    NSLog(@"s5->%p",s5);
-    NSLog(@"s6->%p",s6);
-    
-    
-    NSLog(@"s0 vaule->%@",s0);
-    NSLog(@"s1 vaule->%@",s1);
-    NSLog(@"s2 vaule->%@",s2);
-    NSLog(@"s3 vaule->%@",s3);
-    NSLog(@"s4 vaule->%@",s4);
-    NSLog(@"s5 vaule->%@",s5);
-    NSLog(@"s6 vaule->%@",s6);
-    
-    
-    NSLog(@"s0 <-> s2 %d", s0 == s2);
-    NSLog(@"s2 <-> s3 %d", s2 == s3);
-    
-    
-    NSLog(@"s0 Equal s2 %d", [s0 isEqualToString: s2]);
-    NSLog(@"s2 Equal s3 %d", [s2 isEqualToString: s3]);
+//    NSLog(@"s0->%p",s0);
+//    NSLog(@"s1->%p",s1);
+//    NSLog(@"s2->%p",s2);
+//    NSLog(@"s3->%p",s3);
+//    NSLog(@"s4->%p",s4);
+//    NSLog(@"s5->%p",s5);
+//    NSLog(@"s6->%p",s6);
+//    
+//    
+//    NSLog(@"s0 vaule->%@",s0);
+//    NSLog(@"s1 vaule->%@",s1);
+//    NSLog(@"s2 vaule->%@",s2);
+//    NSLog(@"s3 vaule->%@",s3);
+//    NSLog(@"s4 vaule->%@",s4);
+//    NSLog(@"s5 vaule->%@",s5);
+//    NSLog(@"s6 vaule->%@",s6);
+//    
+//    
+//    NSLog(@"s0 <-> s2 %d", s0 == s2);
+//    NSLog(@"s2 <-> s3 %d", s2 == s3);
+//    
+//    
+//    NSLog(@"s0 Equal s2 %d", [s0 isEqualToString: s2]);
+//    NSLog(@"s2 Equal s3 %d", [s2 isEqualToString: s3]);
     
     //总结isEqualToString是比较值,==号是比较指针。
     //stringWithFormat生成的不再数据常量去
@@ -73,18 +73,63 @@
      */
     
     
-    UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(20, 20, 200, 200)];
-    [view1 setBounds:CGRectMake(-30, -30, 250, 250)];
-    view1.backgroundColor = [UIColor redColor];
-    [self.view addSubview:view1];//添加到self.view
-    NSLog(@"view1 frame:%@========view1 bounds:%@",NSStringFromCGRect(view1.frame),NSStringFromCGRect(view1.bounds));
-    
-    UIView *view2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    view2.backgroundColor = [UIColor yellowColor];
-    [view1 addSubview:view2];//添加到view1上,[此时view1坐标系左上角起点为(-30,-30)]
-    NSLog(@"view2 frame:%@========view2 bounds:%@",NSStringFromCGRect(view2.frame),NSStringFromCGRect(view2.bounds));
+//    UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(20, 20, 200, 200)];
+//    [view1 setBounds:CGRectMake(-30, -30, 250, 250)];
+//    view1.backgroundColor = [UIColor redColor];
+//    [self.view addSubview:view1];//添加到self.view
+//    NSLog(@"view1 frame:%@========view1 bounds:%@",NSStringFromCGRect(view1.frame),NSStringFromCGRect(view1.bounds));
+//    
+//    UIView *view2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+//    view2.backgroundColor = [UIColor yellowColor];
+//    [view1 addSubview:view2];//添加到view1上,[此时view1坐标系左上角起点为(-30,-30)]
+//    NSLog(@"view2 frame:%@========view2 bounds:%@",NSStringFromCGRect(view2.frame),NSStringFromCGRect(view2.bounds));
     
 
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+    NSString *plistPath1 = [paths objectAtIndex:0];
+    //得到完整的文件名
+    NSString *filename=[plistPath1 stringByAppendingPathComponent:@"test.plist"];
+    //输入写入
+    
+    NSMutableDictionary * city = [[NSMutableDictionary alloc]init];
+    city[@"name"] = @"杭州";
+    city[@"id"] = @"hanghzhou";
+    NSMutableArray * citys = [[NSMutableArray alloc]init];
+    NSInteger i = 0;
+    while (i<3) {
+        [citys addObject:city];
+        i++;
+    }
+    
+    
+    
+    
+    NSMutableDictionary * province = [[NSMutableDictionary alloc]init];
+    province[@"citys"] = citys;
+    province[@"name"] = @"浙江";
+    province[@"id"] = @"1";
+    NSMutableArray * provinces = [[NSMutableArray alloc]init];
+    NSInteger j = 0;
+    while (j<12) {
+        [provinces addObject:province];
+        j++;
+    }
+    
+    
+    NSMutableDictionary * country = [[NSMutableDictionary alloc]init];
+    country[@"name"] = @"中国全部";
+    country[@"id"] = @"0";
+    country[@"provinces"] = provinces;
+    NSMutableArray * countrys = [[NSMutableArray alloc]init];
+    NSInteger k = 0;
+    while (k<3) {
+        [countrys addObject:country];
+        k++;
+    }
+
+    [countrys writeToFile:filename atomically:YES];
+    
+    NSLog(@"%@",plistPath1);
 }
 
 
