@@ -177,7 +177,7 @@ protocol Number {  // 1
      static func +(l: Self, r: Self) -> Self // 2
 }
 
-extension Double : Number {} // 3
+extension Double : Number {}   // 3
 extension Float  : Number {}
 extension Int    : Number {}
 
