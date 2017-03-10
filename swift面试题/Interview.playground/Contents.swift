@@ -88,6 +88,14 @@ car1 = "Tesla"
 closure1()
 
 
+var car2 = "Benz"
+typealias PrintClosure = ([String]) -> Void
+let closure2: PrintClosure = { a in
+    print("I drive \(a[0])")
+}
+car = "Tesla"
+closure2([car2])
+
 //
 //print(Unmanaged<AnyObject>.passUnretained(array as AnyObject).toOpaque())
 //print(Unmanaged<AnyObject>.passUnretained(array1 as AnyObject).toOpaque())
