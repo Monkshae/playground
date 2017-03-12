@@ -3,6 +3,7 @@
 import UIKit
 
 //http://swift.gg/2016/03/30/Dealing-With-Bit-Sets-In-Swift/
+//https://github.com/uraimo/Bitter
 
 /* stride : 从“T”的一个实例的开始到“Array <T>”中的下一个的开始的字节数。
      这与'UnsafePointer <T>`移动的字节数相同
@@ -39,23 +40,23 @@ MemoryLayout<AClass>.stride
 MemoryLayout<BClass>.stride
 
 
-struct A {
-    var a: UInt8 = 0
-    var b: UInt32 = 0
-    var c: UInt64 = 0
-}
-
-struct B {
-    var sa: A
-    var d: UInt8 = 0
-//    var f: UInt32 = 0
-}
-
-
-
-
-print(MemoryLayout<A>.size, MemoryLayout<A>.stride)
-print(MemoryLayout<B>.size, MemoryLayout<B>.stride)
+//struct A {
+//    var a: UInt8 = 0
+//    var b: UInt32 = 0
+//    var c: UInt64 = 0
+//}
+//
+//struct B {
+//    var sa: A
+//    var d: UInt8 = 0
+////    var f: UInt32 = 0
+//}
+//
+//
+//
+//
+//print(MemoryLayout<A>.size, MemoryLayout<A>.stride)
+//print(MemoryLayout<B>.size, MemoryLayout<B>.stride)
 
 
 /* 整型转换
@@ -153,3 +154,15 @@ let c = a ^ b ^ b
 a = a ^ b //①临时保存两个数的异或值,并保存在a中
 b = a ^ b //②展开是 b = a ^ b ^ b(a、b是原始的a、b),就是将原始的a值赋值给b
 a = a ^ b //③此时的b中保存的值就是原始的a值了，而a值保存的是原始a、b的异或值 所以a = a ^ b ^ a(a、b是原始的a、b), b两次异或a结果就是原始的b值，然后赋值给a，完成了交换
+
+let color = 0x5D45BFA0
+
+let R = color & 0xFF
+print(String(R,radix:16,uppercase:true))           // 打印16进制值
+
+let G = (color >> 8) & 0xFF
+print(String(G,radix:16,uppercase:true))           // 打印16进制值
+
+let B = (color >> 16) & 0xFF
+print(String(B,radix:16,uppercase:true))           // 打印16进制值
+
