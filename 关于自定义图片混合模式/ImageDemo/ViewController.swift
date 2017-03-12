@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ViewController.swifthttp://www.jianshu.com/p/fee50e03f7b5
 //  ImageDemo
 //
 //  Created by licong on 2017/3/12.
@@ -9,9 +9,16 @@
 import UIKit
 
 /*
+  ojec中国介绍图像学https://www.objccn.io/issue-3-1/
+ 
   https://www.raywenderlich.com/69855/image-processing-in-ios-part-1-raw-bitmap-modification
+  中文翻译 http://www.tairan.com/archives/7427/
   https://www.raywenderlich.com/71151/image-processing-ios-part-2-core-graphics-core-image-gpuimage
   https://www.raywenderlich.com/32283/core-graphics-tutorial-lines-rectangles-and-gradients
+  http://blog.csdn.net/zhangao0086/article/details/39120331
+  http://www.jianshu.com/p/3e2cca585ccc
+  http://www.cocoachina.com/industry/20140115/7703.html
+  http://www.jianshu.com/p/175631f45ec6
  
  */
 
@@ -21,7 +28,8 @@ private var kRadio = CGFloat(1.0)
 class ViewController: UIViewController {
 
     private var imageView: UIImageView!
-    
+    private var a: Int!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
