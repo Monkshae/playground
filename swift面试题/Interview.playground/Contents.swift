@@ -72,6 +72,7 @@ func divide1(dividend: Double?, by divisor: Double?) -> Double? {
 }
 
 //以下函数会打印出什么?
+//闭包是通过截获外部变量的引用从而实现对变量的修改的
 var car = "Benz"
 let closure = { [car] in
     print("I drive \(car)")
