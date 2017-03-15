@@ -10,6 +10,7 @@ import UIKit
 
 /*
   ojec中国介绍图像学https://www.objccn.io/issue-3-1/
+ iOS 事件处理机制与图像渲染过程 http://www.cocoachina.com/ios/20151203/14549.html
  
   https://www.raywenderlich.com/69855/image-processing-in-ios-part-1-raw-bitmap-modification
   中文翻译 http://www.tairan.com/archives/7427/
