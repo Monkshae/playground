@@ -101,3 +101,58 @@ closure2([car2])
 //print(Unmanaged<AnyObject>.passUnretained(array as AnyObject).toOpaque())
 //print(Unmanaged<AnyObject>.passUnretained(array1 as AnyObject).toOpaque())
 //
+
+
+protocol Pizzeria {
+    func makePizza(_ ingredients: [String])
+}
+
+extension Pizzeria {
+    func makeMargherita() {
+        return makePizza(["tomato", "mozzarella"])
+    }
+}
+
+struct Lombardis: Pizzeria {
+    func makePizza(_ ingredients: [String]) {
+        print(ingredients)
+    }
+    func makeMargherita() {
+        return makePizza(["tomato", "basil", "mozzarella"])
+    }
+}
+
+let lombardis1: Pizzeria = Lombardis()
+let lombardis2: Lombardis = Lombardis()
+lombardis1.makeMargherita()
+lombardis2.makeMargherita()
+
+
+
+
+/*
+  给你加一题,写个方法，将下面数组转换为以下结构的字典
+  let arr = ["a", "b", "c"]
+  let dic =["c": ["b": ["a": [:]]]]
+
+ */
+
+func convert<T: Hashable>(array: inout [T]) -> [T: Any] {
+    
+    guard array.count > 0 else {
+        return [T: Any]()
+    }
+    
+    if array.count == 1 {
+        return [array.last!: [:]]
+    }
+    let key = array.removeLast()
+    let value = convert(array: &array)
+    return [key: value]
+}
+
+var arr = ["a", "b", "c"]
+let x =  convert(array: &arr)
+print(x)
+
+
