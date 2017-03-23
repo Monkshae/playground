@@ -200,3 +200,4 @@ func ⊕<T:Number>(left: [T], right: [T]) -> [T] { // 4
 
 var doubleArray = [2.4, 3.6] ⊕ [1.6, 2.4]
 var intArray = [2, 4] ⊕ [1, 2]
+

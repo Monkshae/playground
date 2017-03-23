@@ -281,4 +281,11 @@ for customerProvider in customerProviders {
 }
 // Prints "Now serving Barry!"
 // Prints "Now serving Daniella!"
+     let absences = [0, 2, 0, 4, 0, 3, 1, 0]
 
+
+let midpoint = absences.count / 2
+var firstHalf = absences.prefix(upTo: midpoint)
+firstHalf[0] = 19
+print(absences)
+let secondHalf = absences.suffix(from: midpoint)

@@ -73,63 +73,19 @@
      */
     
     
-//    UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(20, 20, 200, 200)];
-//    [view1 setBounds:CGRectMake(-30, -30, 250, 250)];
-//    view1.backgroundColor = [UIColor redColor];
-//    [self.view addSubview:view1];//添加到self.view
-//    NSLog(@"view1 frame:%@========view1 bounds:%@",NSStringFromCGRect(view1.frame),NSStringFromCGRect(view1.bounds));
-//    
-//    UIView *view2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-//    view2.backgroundColor = [UIColor yellowColor];
-//    [view1 addSubview:view2];//添加到view1上,[此时view1坐标系左上角起点为(-30,-30)]
-//    NSLog(@"view2 frame:%@========view2 bounds:%@",NSStringFromCGRect(view2.frame),NSStringFromCGRect(view2.bounds));
+    UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(20, 20, 200, 200)];
+    [view1 setBounds:CGRectMake(-20, -20, 200, 200)];//此时view1左上角的坐标点是(20,20),原来是(0,0)
+    view1.backgroundColor = [UIColor redColor];
+    [self.view addSubview:view1];//添加到self.view
+    NSLog(@"view1 frame:%@========view1 bounds:%@",NSStringFromCGRect(view1.frame),NSStringFromCGRect(view1.bounds));
+    
+    UIView *view2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    view2.backgroundColor = [UIColor yellowColor];
+    [view1 addSubview:view2];//添加到view1上,[此时view1坐标系左上角起点为(-30,-30)]
+    NSLog(@"view2 frame:%@========view2 bounds:%@",NSStringFromCGRect(view2.frame),NSStringFromCGRect(view2.bounds));
     
 
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
-    NSString *plistPath1 = [paths objectAtIndex:0];
-    //得到完整的文件名
-    NSString *filename=[plistPath1 stringByAppendingPathComponent:@"test.plist"];
-    //输入写入
-    
-    NSMutableDictionary * city = [[NSMutableDictionary alloc]init];
-    city[@"name"] = @"杭州";
-    city[@"id"] = @"hanghzhou";
-    NSMutableArray * citys = [[NSMutableArray alloc]init];
-    NSInteger i = 0;
-    while (i<3) {
-        [citys addObject:city];
-        i++;
-    }
-    
-    
-    
-    
-    NSMutableDictionary * province = [[NSMutableDictionary alloc]init];
-    province[@"citys"] = citys;
-    province[@"name"] = @"浙江";
-    province[@"id"] = @"1";
-    NSMutableArray * provinces = [[NSMutableArray alloc]init];
-    NSInteger j = 0;
-    while (j<12) {
-        [provinces addObject:province];
-        j++;
-    }
-    
-    
-    NSMutableDictionary * country = [[NSMutableDictionary alloc]init];
-    country[@"name"] = @"中国全部";
-    country[@"id"] = @"0";
-    country[@"provinces"] = provinces;
-    NSMutableArray * countrys = [[NSMutableArray alloc]init];
-    NSInteger k = 0;
-    while (k<3) {
-        [countrys addObject:country];
-        k++;
-    }
 
-    [countrys writeToFile:filename atomically:YES];
-    
-    NSLog(@"%@",plistPath1);
 }
 
 

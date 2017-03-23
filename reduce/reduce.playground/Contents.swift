@@ -37,6 +37,7 @@ func rmap(elements: [Int], transform: @escaping (Int) -> Int) -> [Int] {
 //print(rmap(elements: [1, 2, 3, 4], transform: { $0 * 2}))
 
 let mapped = [1, 2, 3, 4].map { Array(repeating: $0, count: $0) }
+
 //Reduce 范例
 
 // 初始值 initial 为 0，每次遍历数组元素，执行 + 操作

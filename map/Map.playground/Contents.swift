@@ -30,6 +30,6 @@ res
 var flatRes = numbersCompound.flatMap { $0.map{ $0 + 2 } }
 flatRes
 
-Collection
+
 
 

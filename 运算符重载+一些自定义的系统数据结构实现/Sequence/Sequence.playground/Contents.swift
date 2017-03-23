@@ -98,3 +98,9 @@ for book in bookList {
     print("\(book.name) 价格 ￥\(book.price)")
 }
 
+ let numbers = [1, 2, 3, 4]
+ let flatMap = numbers.flatMap { $0 * 2}
+
+ let map = numbers.map { $0 * 2}
+map
+flatMap

@@ -1,0 +1,30 @@
+use_frameworks!
+inhibit_all_warnings!
+platform :ios, '8.0'
+
+#open source
+source 'https://github.com/CocoaPods/Specs.git'
+
+
+target 'ImageDemo' do
+
+    pod 'IQKeyboardManager'                                     , '4.0.3'
+    pod 'Sourcery'
+    
+end
+
+
+
+
+# post_install do |installer|
+#     installer.pods_project.targets.each do |target|
+#         target.build_configurations.each do |config|
+
+#             # 指定使用swift 2.3版本   
+#             config.build_settings['SWIFT_VERSION'] = '2.3'
+#             # 只需要主项目里的该设置为YES就可以了，POD不需要，以防多次拷贝Swift standard libraries，见https://developer.apple.com/library/content/qa/qa1881/_index.html
+#             config.build_settings['ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES'] = 'NO'
+
+#         end
+#     end
+# end
